@@ -1,9 +1,13 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System;
 
 [RequireComponent(typeof(Enemy))]
 public class EnemyMovement : MonoBehaviour {
 
+	
+	public GameObject mesh;
 	private Transform target;
 	private int wavepointIndex = 0;
 
@@ -14,6 +18,7 @@ public class EnemyMovement : MonoBehaviour {
 		enemy = GetComponent<Enemy>();
 
 		target = Waypoints.points[0];
+		mesh.transform.rotation = Quaternion.LookRotation(target.position - transform.position, Vector3.up);
 	}
 
 	void Update()
@@ -39,6 +44,7 @@ public class EnemyMovement : MonoBehaviour {
 
 		wavepointIndex++;
 		target = Waypoints.points[wavepointIndex];
+		mesh.transform.rotation = Quaternion.LookRotation(target.position - transform.position, Vector3.up);
 	}
 
 	void EndPath()
